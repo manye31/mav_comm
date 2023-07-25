@@ -1,45 +1,56 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(mav_planning_msgs)
 
-find_package(catkin REQUIRED COMPONENTS geometry_msgs sensor_msgs std_msgs message_generation mav_msgs trajectory_msgs)
-include_directories(include ${catkin_INCLUDE_DIRS})
-
-find_package(Eigen3 QUIET)
-if(NOT EIGEN3_FOUND)
-  # ROS == Indigo.
-  find_package(cmake_modules REQUIRED)
-  find_package(Eigen REQUIRED)
-  set(EIGEN3_INCLUDE_DIRS ${EIGEN_INCLUDE_DIRS})
-else()
-  # ROS > Indigo.
-  set(EIGEN3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+# Default to C99
+if(NOT CMAKE_C_STANDARD)
+  set(CMAKE_C_STANDARD 99)
 endif()
 
-add_message_files(
-  FILES
-  Point2D.msg
-  PointCloudWithPose.msg
-  Polygon2D.msg
-  PolygonWithHoles.msg
-  PolygonWithHolesStamped.msg
-  PolynomialSegment.msg
-  PolynomialTrajectory.msg
-  PolynomialSegment4D.msg
-  PolynomialTrajectory4D.msg
+# Default to C++17
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# Find Dependencies
+find_package(ament_cmake REQUIRED)
+find_package(builtin_interfaces REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(geometry_msgs REQUIRED) 
+find_package(sensor_msgs REQUIRED) 
+find_package(std_msgs REQUIRED) 
+find_package(mav_msgs REQUIRED) 
+find_package(trajectory_msgs REQUIRED)
+find_package(Eigen3 3.3 REQUIRED)
+
+include_directories(
+  include
 )
 
-add_service_files(
-  FILES
-  PlannerService.srv
-  PolygonService.srv
-  ChangeNameService.srv
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/Point2D.msg"
+  "msg/PointCloudWithPose.msg"
+  "msg/Polygon2D.msg"
+  "msg/PolygonWithHoles.msg"
+  "msg/PolygonWithHolesStamped.msg"
+  "msg/PolynomialSegment.msg"
+  "msg/PolynomialTrajectory.msg"
+  "msg/PolynomialSegment4D.msg"
+  "msg/PolynomialTrajectory4D.msg"
+  "srv/PlannerService.srv"
+  "srv/PolygonService.srv"
+  "srv/ChangeNameService.srv"
+  DEPENDENCIES builtin_interfaces std_msgs
+  ADD_LINTER_TESTS
 )
 
-generate_messages(
-  DEPENDENCIES geometry_msgs sensor_msgs std_msgs mav_msgs trajectory_msgs
-)
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+endif()
 
-catkin_package(
-  INCLUDE_DIRS include ${EIGEN3_INCLUDE_DIRS}
-  CATKIN_DEPENDS message_runtime geometry_msgs sensor_msgs std_msgs mav_msgs trajectory_msgs
-)
+ament_package()
+

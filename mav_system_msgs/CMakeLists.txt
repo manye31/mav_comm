@@ -1,14 +1,36 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(mav_system_msgs)
 
-find_package(catkin REQUIRED COMPONENTS message_generation std_msgs)
-include_directories(include ${catkin_INCLUDE_DIRS})
+# Default to C99
+if(NOT CMAKE_C_STANDARD)
+  set(CMAKE_C_STANDARD 99)
+endif()
 
+# Default to C++17
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
 
-add_message_files()
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-#add_service_files()
+# Find Dependencies
+find_package(ament_cmake REQUIRED)
+find_package(builtin_interfaces REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
 
-generate_messages(DEPENDENCIES std_msgs)
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/CpuInfo.msg"
+  "msg/ProcessInfo.msg"
+  DEPENDENCIES builtin_interfaces std_msgs
+  ADD_LINTER_TESTS
+)
 
-catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_package()
