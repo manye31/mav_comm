@@ -21,7 +21,7 @@
 #ifndef MAV_MSGS_DEFAULT_VALUES_H_
 #define MAV_MSGS_DEFAULT_VALUES_H_
 
-#include <mav_msgs/msg/common.h>
+#include <mav_msgs/common.h>
 
 namespace mav_msgs {
 

@@ -23,9 +23,9 @@
 #ifndef MAV_MSGS_COMMON_H
 #define MAV_MSGS_COMMON_H
 
-#include <geometry_msgs/msg/Point.h>
-#include <geometry_msgs/msg/Quaternion.h>
-#include <geometry_msgs/msg/Vector3.h>
+#include <geometry_msgs/msg/point.hpp>
+#include <geometry_msgs/msg/quaternion.hpp>
+#include <geometry_msgs/msg/vector3.hpp>
 #include <Eigen/Geometry>
 #include <boost/algorithm/clamp.hpp>
 

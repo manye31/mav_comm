@@ -25,7 +25,7 @@
 #include <deque>
 #include <iostream>
 
-#include "mav_msgs/msg/common.h"
+#include "mav_msgs/common.h"
 
 namespace mav_msgs {
   

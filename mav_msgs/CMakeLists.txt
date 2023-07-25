@@ -27,7 +27,7 @@ find_package(nav_msgs REQUIRED)
 find_package(Eigen3 3.3 REQUIRED)
 
 include_directories(
-  include
+  include/
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
@@ -42,6 +42,13 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   DEPENDENCIES builtin_interfaces std_msgs
   ADD_LINTER_TESTS
 )
+
+install(
+  DIRECTORY include/
+  DESTINATION include
+)
+
+ament_export_include_directories(include)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

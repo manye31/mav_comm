@@ -23,11 +23,11 @@
 #ifndef MAV_MSGS_CONVERSIONS_H
 #define MAV_MSGS_CONVERSIONS_H
 
-#include <geometry_msgs/msg/Point.h>
-#include <geometry_msgs/msg/PoseStamped.h>
-#include <geometry_msgs/msg/Quaternion.h>
-#include <geometry_msgs/msg/TransformStamped.h>
-#include <geometry_msgs/msg/Vector3.h>
+#include <geometry_msgs/msg/point.h>
+#include <geometry_msgs/msg/pose_stamped.h>
+#include <geometry_msgs/msg/quaternion.h>
+#include <geometry_msgs/msg/transform_stamped.h>
+#include <geometry_msgs/msg/vector3.h>
 #include <nav_msgs/msg/Odometry.h>
 #include <rclcpp/rclcpp.hpp>
 #include <trajectory_msgs/msg/MultiDOFJointTrajectory.h>
