@@ -28,6 +28,7 @@
 #include <geometry_msgs/msg/vector3.hpp>
 #include <Eigen/Geometry>
 #include <boost/algorithm/clamp.hpp>
+#include <iostream>
 
 namespace mav_msgs {
 

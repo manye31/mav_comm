@@ -39,7 +39,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Status.msg"
   "msg/FilteredSensorData.msg"
   "msg/GpsWaypoint.msg"
-  DEPENDENCIES builtin_interfaces std_msgs
+  DEPENDENCIES builtin_interfaces std_msgs nav_msgs
   ADD_LINTER_TESTS
 )
 
