@@ -29,6 +29,7 @@
 #include <geometry_msgs/msg/quaternion.hpp>
 #include <geometry_msgs/msg/transform_stamped.hpp>
 #include <geometry_msgs/msg/vector3.hpp>
+#include <tf2_eigen/tf2_eigen.h>
 #include <nav_msgs/msg/odometry.hpp>
 #include <trajectory_msgs/msg/multi_dof_joint_trajectory.hpp>
 
@@ -158,6 +159,20 @@ inline void eigenTrajectoryPointFromPoseMsg(
 
   trajectory_point->timestamp_ns = msg.header.stamp.nanosec + msg.header.stamp.sec*1e-9;
   eigenTrajectoryPointFromPoseMsg(msg.pose, trajectory_point);
+}
+
+inline void eigenTrajectoryPointFromPoseEigen(
+    const Eigen::Vector3d& position, const Eigen::Quaterniond& orientation, EigenTrajectoryPoint* trajectory_point) {
+  assert(trajectory_point != NULL);
+
+  trajectory_point->position_W = position;
+  trajectory_point->orientation_W_B = orientation;
+  trajectory_point->velocity_W.setZero();
+  trajectory_point->angular_velocity_W.setZero();
+  trajectory_point->acceleration_W.setZero();
+  trajectory_point->angular_acceleration_W.setZero();
+  trajectory_point->jerk_W.setZero();
+  trajectory_point->snap_W.setZero();
 }
 
 /**

@@ -245,7 +245,8 @@ struct EigenTrajectoryPoint {
 
   std::string toString() const {
     std::stringstream ss;
-    ss << "position:          " << position_W.transpose() << std::endl
+    ss << "time_from_start_ns " << time_from_start_ns << std::endl
+       << "position:          " << position_W.transpose() << std::endl
        << "velocity:          " << velocity_W.transpose() << std::endl
        << "acceleration:      " << acceleration_W.transpose() << std::endl
        << "jerk:              " << jerk_W.transpose() << std::endl
